@@ -23,3 +23,13 @@ export const validateEditPost = (data: any) => {
 
   return { title, content };
 };
+
+export const validateComment = (data: any) => {
+  const { content, author } = data;
+
+  if (!content || !author) {
+    throw new Error("content and author are required");
+  }
+
+  return { content, author };
+};

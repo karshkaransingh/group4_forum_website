@@ -6,6 +6,8 @@ import {
   editPost,
   getPosts,
   getPostById,
+  likePost,
+  addComment,
 } from "../../../controllers/post";
 
 const router = express.Router();
@@ -46,6 +48,16 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   await deletePost(dependencies)(req.params.id);
   res.json({ message: "Deleted" });
+});
+
+router.post("/:id/like", async (req, res) => {
+  const result = await likePost(dependencies)(req.params.id);
+  res.json(result);
+});
+
+router.post("/:id/comment", async (req, res) => {
+  const result = await addComment(dependencies)(req.params.id, req.body);
+  res.json(result);
 });
 
 export = router;

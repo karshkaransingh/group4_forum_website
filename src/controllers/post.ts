@@ -1,5 +1,5 @@
 import postQueries from "../infrastructure/mongodb/queries/post";
-import { validateCreatePost, validateEditPost } from "../domain/post";
+import { validateCreatePost, validateEditPost, validateComment } from "../domain/post";
 
 export const createPost = (dependencies: any) => async (data: any) => {
   const { mongoDbClient } = dependencies;
@@ -31,3 +31,29 @@ export const deletePost = (dependencies: any) => async (id: string) => {
   const { mongoDbClient } = dependencies;
   return await postQueries.deletePost(mongoDbClient.Post, id);
 };
+
+export const likePost = (dependencies: any) => async (id: string) => {
+  const { mongoDbClient } = dependencies;
+
+  const post = await postQueries.getPostById(mongoDbClient.Post, id);
+
+  if (!post) throw new Error("Post not found");
+
+  post.likes = (post.likes || 0) + 1;
+
+  return await postQueries.savePost(post);
+};
+
+export const addComment =
+  (dependencies: any) => async (id: string, data: any) => {
+    const { mongoDbClient } = dependencies;
+
+    const post = await postQueries.getPostById(mongoDbClient.Post, id);
+    if (!post) throw new Error("Post not found");
+
+    const valid = validateComment(data);
+
+    post.comments.push(valid);
+
+    return await postQueries.savePost(post);
+  };
