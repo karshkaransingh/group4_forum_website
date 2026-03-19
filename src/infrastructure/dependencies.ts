@@ -1,5 +1,9 @@
-import postRoutes from "../ports/rest/routes/post";
+import config from "../config/config";
+import mongoDbClient from "./mongodb/mongoDbClient";
 
-export const dependencies = {
-  postRoutes
+const dependencies = {
+  config,
+  mongoDbClient,
 };
+
+export default dependencies;

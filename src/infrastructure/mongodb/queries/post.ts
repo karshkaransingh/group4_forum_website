@@ -1,14 +1,24 @@
-import { Post } from "../models/post";
+const createPost = async (mongoDbPost: any, postData: any) =>
+  new mongoDbPost(postData).save();
 
-export const createPostQuery = async (postData: any) => {
-  const post = new Post(postData);
-  return await post.save();
-};
+const getPosts = async (mongoDbPost: any) => mongoDbPost.find();
 
-export const getAllPostsQuery = async () => {
-  return await Post.find();
-};
+const getPostById = async (mongoDbPost: any, id: string) =>
+  mongoDbPost.findById(id);
 
-export const getPostByIdQuery = async (id: string) => {
-  return await Post.findById(id);
+const updatePost = async (mongoDbPost: any, id: string, data: any) =>
+  mongoDbPost.findByIdAndUpdate(id, data, { new: true });
+
+const deletePost = async (mongoDbPost: any, id: string) =>
+  mongoDbPost.findByIdAndDelete(id);
+
+const savePost = async (post: any) => post.save();
+
+export default {
+  createPost,
+  getPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+  savePost,
 };

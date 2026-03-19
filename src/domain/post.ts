@@ -1,27 +1,25 @@
-import {
-  createPostQuery,
-  getAllPostsQuery,
-  getPostByIdQuery
-} from "../infrastructure/mongodb/queries/post";
+export const validateCreatePost = (data: any) => {
+  const { title, content, author } = data;
 
-export const createPostDomain = async (
-  title: string,
-  content: string,
-  author: string
-) => {
-  return await createPostQuery({
+  if (!title || !content || !author) {
+    throw new Error("title, content and author are required");
+  }
+
+  return {
     title,
     content,
     author,
     likes: 0,
-    comments: []
-  });
+    comments: [],
+  };
 };
 
-export const getPostsDomain = async () => {
-  return await getAllPostsQuery();
-};
+export const validateEditPost = (data: any) => {
+  const { title, content } = data;
 
-export const getPostByIdDomain = async (id: string) => {
-  return await getPostByIdQuery(id);
+  if (!title || !content) {
+    throw new Error("title and content are required");
+  }
+
+  return { title, content };
 };

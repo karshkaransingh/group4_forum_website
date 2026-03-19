@@ -6,6 +6,6 @@ export const connectMongo = async () => {
     await connection(config.mongoUrl);
     console.log("MONGODB CONNECTION PASSED");
   } catch (error) {
-    console.log("MONGO CONNECTION FAILED", error);
+    console.log("MONGODB CONNECTION FAILED", error);
   }
 };

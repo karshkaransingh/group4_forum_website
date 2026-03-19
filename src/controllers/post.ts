@@ -1,47 +1,33 @@
-import {
-  createPostDomain,
-  getPostByIdDomain,
-  getPostsDomain
-} from "../domain/post";
+import postQueries from "../infrastructure/mongodb/queries/post";
+import { validateCreatePost, validateEditPost } from "../domain/post";
 
-export const createPost = async (req: any, res: any) => {
-  try {
-    const { title, content, author } = req.body;
+export const createPost = (dependencies: any) => async (data: any) => {
+  const { mongoDbClient } = dependencies;
+  const Post = mongoDbClient.Post;
 
-    if (!title || !content || !author) {
-      return res.status(400).json({
-        error: "title, content and author are required"
-      });
-    }
-
-    const post = await createPostDomain(title, content, author);
-    res.status(201).json(post);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
+  const valid = validateCreatePost(data);
+  return await postQueries.createPost(Post, valid);
 };
 
-export const getPosts = async (req: any, res: any) => {
-  try {
-    const posts = await getPostsDomain();
-    res.json(posts);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
+export const getPosts = (dependencies: any) => async () => {
+  const { mongoDbClient } = dependencies;
+  return await postQueries.getPosts(mongoDbClient.Post);
 };
 
-export const getPostById = async (req: any, res: any) => {
-  try {
-    const post = await getPostByIdDomain(req.params.id);
+export const getPostById = (dependencies: any) => async (id: string) => {
+  const { mongoDbClient } = dependencies;
+  return await postQueries.getPostById(mongoDbClient.Post, id);
+};
 
-    if (!post) {
-      return res.status(404).json({
-        error: "Post not found"
-      });
-    }
+export const editPost =
+  (dependencies: any) => async (id: string, data: any) => {
+    const { mongoDbClient } = dependencies;
+    const valid = validateEditPost(data);
 
-    res.json(post);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
+    return await postQueries.updatePost(mongoDbClient.Post, id, valid);
+  };
+
+export const deletePost = (dependencies: any) => async (id: string) => {
+  const { mongoDbClient } = dependencies;
+  return await postQueries.deletePost(mongoDbClient.Post, id);
 };
