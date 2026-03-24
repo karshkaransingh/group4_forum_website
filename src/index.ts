@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import postRoutes from "./ports/rest/routes/post";
+import userRoutes from "./ports/rest/routes/user";
 import { connectMongo } from "./infrastructure/mongodb/connection";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/healthcheck", (_req, res) =>
 );
 
 app.use("/api/posts", postRoutes);
+app.use("/api/user", userRoutes);
 
 connectMongo();
 
