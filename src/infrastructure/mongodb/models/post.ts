@@ -9,7 +9,9 @@ const PostSchema = new mongoose.Schema({
   title: String,
   content: String,
   author: String,
+  authorId: String,
   likes: { type: Number, default: 0 },
+  likedBy: {type: [String], default: []},
   comments: { type: [CommentSchema], default: [] }
 });
 

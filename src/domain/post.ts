@@ -1,5 +1,5 @@
 export const validateCreatePost = (data: any) => {
-  const { title, content, author } = data;
+  const { title, content, author, authorId } = data;
 
   if (!title || !content || !author) {
     throw new Error("title, content and author are required");
@@ -9,6 +9,7 @@ export const validateCreatePost = (data: any) => {
     title,
     content,
     author,
+    authorId,
     likes: 0,
     comments: [],
   };
