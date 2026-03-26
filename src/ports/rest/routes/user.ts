@@ -6,6 +6,7 @@ import {
   authenticateToken,
   generateAccessToken,
 } from "../middleware/authentication";
+import config from "../../../config/config";
 
 const router = express.Router();
 
@@ -44,7 +45,7 @@ router.post("/create", async (req: Request, res: Response) => {
     return res.status(200).json(createdUser);
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error creating user: ${error.message}",
+      message: `Error creating user: ${error.message}`,
     });
   }
 });
@@ -59,6 +60,24 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
       });
     }
 
+    // ADMIN LOGIN CHECK
+    if (
+      userName === config.adminUserName &&
+      userPassword === config.adminPassword
+    ) {
+      const accessToken = generateAccessToken({
+        userName: config.adminUserName,
+        _id: "admin",
+        isAdmin: true,
+      });
+
+      return res.json({
+        accessToken,
+        role: "admin",
+      });
+    }
+
+    // NORMAL USER LOGIN
     const { mongoDbClient } = dependencies;
     const mongoDbUser = mongoDbClient.User;
 
@@ -81,14 +100,19 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
       });
     }
 
-    const accessToken = generateAccessToken(user);
+    const accessToken = generateAccessToken({
+      userName: user.userName,
+      _id: user._id.toString(),
+      isAdmin: false,
+    });
 
     return res.json({
       accessToken,
+      role: "user",
     });
   } catch (error: any) {
     return res.status(500).json({
-      message: "Error logging in: ${error.message}",
+      message: `Error logging in: ${error.message}`,
     });
   }
 });

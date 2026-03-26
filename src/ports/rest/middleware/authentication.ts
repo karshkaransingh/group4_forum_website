@@ -3,7 +3,11 @@ import config from "../../../config/config";
 
 export const generateAccessToken = (user: any) => {
   return jwt.sign(
-    { userName: user.userName, userId: user._id.toString() },
+    {
+      userName: user.userName,
+      userId: user._id.toString(),
+      isAdmin: user.isAdmin || false,
+    },
     config.jwtSecret,
     { expiresIn: "1h" },
   );
@@ -29,4 +33,14 @@ export const authenticateToken = (req: any, res: any, next: any) => {
     req.user = user;
     next();
   });
+};
+
+export const authorizeAdmin = (req: any, res: any, next: any) => {
+  if (!req.user || req.user.isAdmin !== true) {
+    return res.status(403).json({
+      message: "Admin access only",
+    });
+  }
+
+  next();
 };

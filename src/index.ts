@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.json());
 
-app.use("/healthcheck", (_req, res) =>
+app.use("/api/healthcheck", (_req, res) =>
   res.status(200).json({ message: "Successful" }),
 );
 
