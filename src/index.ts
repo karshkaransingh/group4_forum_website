@@ -4,6 +4,7 @@ import cors from "cors";
 
 import postRoutes from "./ports/rest/routes/post";
 import userRoutes from "./ports/rest/routes/user";
+import adminRoutes from "./ports/rest/routes/admin";
 import { connectMongo } from "./infrastructure/mongodb/connection";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/healthcheck", (_req, res) =>
 
 app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 connectMongo();
 
