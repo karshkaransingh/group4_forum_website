@@ -1,14 +1,18 @@
+// function to get stats
 export const getSiteStats = (dependencies: any) => async () => {
   const { mongoDbClient } = dependencies;
 
+  // total users and posts
   const totalUsers = await mongoDbClient.User.countDocuments();
   const totalPosts = await mongoDbClient.Post.countDocuments();
 
+  // getting all posts
   const posts: any[] = await mongoDbClient.Post.find();
 
   let totalLikes = 0;
   let totalComments = 0;
 
+  // getting total likes and comments from all posts
   for (const post of posts) {
     totalLikes += post.likes || 0;
     totalComments += post.comments?.length || 0;

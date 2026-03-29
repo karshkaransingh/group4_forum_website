@@ -8,6 +8,7 @@ import {
 
 const router = express.Router();
 
+// route to get site stats (accessed by admin only)
 router.get(
   "/stats",
   authenticateToken,

@@ -1,3 +1,4 @@
+// // function to validate inputs while creating post
 export const validateCreatePost = (data: any) => {
   const { title, content, author, authorId } = data;
 
@@ -15,6 +16,7 @@ export const validateCreatePost = (data: any) => {
   };
 };
 
+// // function to validate inputs while editing post
 export const validateEditPost = (data: any) => {
   const { title, content } = data;
 
@@ -25,6 +27,7 @@ export const validateEditPost = (data: any) => {
   return { title, content };
 };
 
+// // function to validate inputs while commenting on post
 export const validateComment = (data: any) => {
   const { content, author } = data;
 

@@ -10,6 +10,7 @@ import config from "../../../config/config";
 
 const router = express.Router();
 
+// route to create new user
 router.post("/create", async (req: Request, res: Response) => {
   try {
     const { userName, userPassword } = req.body;
@@ -50,6 +51,7 @@ router.post("/create", async (req: Request, res: Response) => {
   }
 });
 
+// route to login
 router.post("/loginJwt", async (req: Request, res: Response) => {
   try {
     const { userName, userPassword } = req.body;
@@ -92,13 +94,23 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
       });
     }
 
+    if (user.isBlocked) {
+      return res.status(403).json({
+        message: "User is blocked after 3 wrong password attempts",
+      });
+    }
+
     const compareResult = await bcrypt.compare(userPassword, user.userPassword);
 
     if (!compareResult) {
+      await userQueries.increaseWrongAttempts(mongoDbUser, user);
+
       return res.status(400).json({
         message: "Invalid password",
       });
     }
+
+    await userQueries.resetWrongAttempts(mongoDbUser, user);
 
     const accessToken = generateAccessToken({
       userName: user.userName,
@@ -117,6 +129,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
   }
 });
 
+// route to check if user authenticated (accessed by authenticated users)
 router.post(
   "/checkUserAuthenticated",
   authenticateToken,

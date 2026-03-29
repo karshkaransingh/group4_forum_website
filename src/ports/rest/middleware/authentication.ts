@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import config from "../../../config/config";
 
+// function to generate access token
 export const generateAccessToken = (user: any) => {
   return jwt.sign(
     {
@@ -13,6 +14,7 @@ export const generateAccessToken = (user: any) => {
   );
 };
 
+// function to authenticate the token
 export const authenticateToken = (req: any, res: any, next: any) => {
   const authHeader: string | undefined = req.headers["authorization"];
   const token = authHeader?.split(" ")[1];
@@ -35,6 +37,7 @@ export const authenticateToken = (req: any, res: any, next: any) => {
   });
 };
 
+// function to give access to admins only
 export const authorizeAdmin = (req: any, res: any, next: any) => {
   if (!req.user || req.user.isAdmin !== true) {
     return res.status(403).json({

@@ -5,6 +5,7 @@ import {
   validateComment,
 } from "../domain/post";
 
+// function to create post
 export const createPost = (dependencies: any) => async (data: any) => {
   const { mongoDbClient } = dependencies;
   const Post = mongoDbClient.Post;
@@ -13,16 +14,19 @@ export const createPost = (dependencies: any) => async (data: any) => {
   return await postQueries.createPost(Post, valid);
 };
 
+// function to get all posts
 export const getPosts = (dependencies: any) => async () => {
   const { mongoDbClient } = dependencies;
   return await postQueries.getPosts(mongoDbClient.Post);
 };
 
+// function to get post by id
 export const getPostById = (dependencies: any) => async (id: string) => {
   const { mongoDbClient } = dependencies;
   return await postQueries.getPostById(mongoDbClient.Post, id);
 };
 
+// function to edit post
 export const editPost =
   (dependencies: any) => async (id: string, data: any, user: any) => {
     const { mongoDbClient } = dependencies;
@@ -34,6 +38,7 @@ export const editPost =
       throw new Error("Post not found");
     }
 
+    // if user is not admin and not post owner he cannot edit the post
     if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only edit your own post");
     }
@@ -43,6 +48,7 @@ export const editPost =
     return await postQueries.updatePost(mongoDbClient.Post, id, valid);
   };
 
+// function to delete post
 export const deletePost =
   (dependencies: any) => async (id: string, user: any) => {
     const { mongoDbClient } = dependencies;
@@ -54,6 +60,7 @@ export const deletePost =
       throw new Error("Post not found");
     }
 
+    // if user is not admin and not post owner he cannot delete the post
     if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only delete your own post");
     }
@@ -61,6 +68,7 @@ export const deletePost =
     return await postQueries.deletePost(mongoDbClient.Post, id);
   };
 
+// function to like post
 export const likePost =
   (dependencies: any) => async (id: string, user: any) => {
     const { mongoDbClient } = dependencies;
@@ -75,6 +83,7 @@ export const likePost =
       post.likedBy = [];
     }
 
+    // if user already liked the post; he cannot like it twice
     if (post.likedBy.includes(userId)) {
       throw new Error("You cannot like twice");
     }
@@ -86,6 +95,7 @@ export const likePost =
     return await postQueries.savePost(post);
   };
 
+// function to comment on post
 export const addComment =
   (dependencies: any) => async (id: string, data: any) => {
     const { mongoDbClient } = dependencies;

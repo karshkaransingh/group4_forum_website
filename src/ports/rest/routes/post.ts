@@ -13,6 +13,7 @@ import {
 
 const router = express.Router();
 
+// route to create post (accessed by authenticated users)
 router.post("/", authenticateToken, async (req: any, res) => {
   try {
     const result = await createPost(dependencies)({
@@ -26,11 +27,13 @@ router.post("/", authenticateToken, async (req: any, res) => {
   }
 });
 
+// route to get posts (accessed by everyone)
 router.get("/", async (_req: any, res) => {
   const result = await getPosts(dependencies)();
   res.json(result);
 });
 
+// route to get post by id (accessed by everyone)
 router.get("/:id", async (req: any, res) => {
   const result = await getPostById(dependencies)(req.params.id);
 
@@ -40,6 +43,7 @@ router.get("/:id", async (req: any, res) => {
   res.json(result);
 });
 
+// route to edit posts (accessed by authenticated users)
 router.put("/:id", authenticateToken, async (req: any, res) => {
   try {
     const result = await editPost(dependencies)(
@@ -58,6 +62,7 @@ router.put("/:id", authenticateToken, async (req: any, res) => {
   }
 });
 
+// route to delete posts (accessed by authenticated users)
 router.delete("/:id", authenticateToken, async (req: any, res) => {
   try {
     await deletePost(dependencies)(req.params.id, req.user);
@@ -67,6 +72,7 @@ router.delete("/:id", authenticateToken, async (req: any, res) => {
   }
 });
 
+// route to like posts (accessed by authenticated users)
 router.post("/:id/like", authenticateToken, async (req: any, res) => {
   try {
     const result = await likePost(dependencies)(req.params.id, req.user);
@@ -76,6 +82,7 @@ router.post("/:id/like", authenticateToken, async (req: any, res) => {
   }
 });
 
+// route to comment on posts (accessed by authenticated users)
 router.post("/:id/comment", authenticateToken, async (req: any, res) => {
   try {
     const result = await addComment(dependencies)(req.params.id, {

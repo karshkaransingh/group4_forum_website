@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// getting secrets from .env
 const PORT = Number(process.env.PORT || 3000);
 const MONGO_URL = process.env.MONGO_URL || "";
 const JWT_SECRET = process.env.JWT_SECRET || "secret12345_hard_to_find";

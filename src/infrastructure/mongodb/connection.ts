@@ -1,6 +1,7 @@
 import { connect as connection } from "mongoose";
 import config from "../../config/config";
 
+// connecting to mongoDB
 export const connectMongo = async () => {
   try {
     await connection(config.mongoUrl);
