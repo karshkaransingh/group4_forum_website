@@ -34,7 +34,7 @@ export const editPost =
       throw new Error("Post not found");
     }
 
-    if (String(post.authorId) !== String(user.userId)) {
+    if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only edit your own post");
     }
 
@@ -54,7 +54,7 @@ export const deletePost =
       throw new Error("Post not found");
     }
 
-    if (String(post.authorId) !== String(user.userId)) {
+    if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only delete your own post");
     }
 
