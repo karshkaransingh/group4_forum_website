@@ -39,7 +39,7 @@ export const editPost =
     }
 
     // if user is not admin and not post owner he cannot edit the post
-    if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
+    if (!user.isAdmin && user.role !== "superuser" && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only edit your own post");
     }
 
@@ -61,7 +61,7 @@ export const deletePost =
     }
 
     // if user is not admin and not post owner he cannot delete the post
-    if (!user.isAdmin && String(post.authorId) !== String(user.userId)) {
+    if (!user.isAdmin && user.role !== "superuser" && String(post.authorId) !== String(user.userId)) {
       throw new Error("You can only delete your own post");
     }
 

@@ -8,6 +8,7 @@ export const generateAccessToken = (user: any) => {
       userName: user.userName,
       userId: user._id.toString(),
       isAdmin: user.isAdmin || false,
+      role: user.role || "user",
     },
     config.jwtSecret,
     { expiresIn: "1h" },

@@ -13,7 +13,7 @@ const router = express.Router();
 // route to create new user
 router.post("/create", async (req: Request, res: Response) => {
   try {
-    const { userName, userPassword } = req.body;
+    const { userName, userPassword, role } = req.body;
 
     if (!userName || !userPassword) {
       return res.status(400).json({
@@ -41,6 +41,7 @@ router.post("/create", async (req: Request, res: Response) => {
     const createdUser = await userQueries.createUser(mongoDbUser, {
       userName,
       userPassword: hashedPassword,
+      role: role || "user",
     });
 
     return res.status(200).json(createdUser);
@@ -116,6 +117,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
       userName: user.userName,
       _id: user._id.toString(),
       isAdmin: false,
+      role: user.role || "user"
     });
 
     return res.json({
