@@ -15,6 +15,7 @@ router.get(
   authorizeAdmin,
   async (_req: any, res: any) => {
     try {
+      // calling admin controller to get the stats
       const result = await getSiteStats(dependencies)();
       res.status(200).json(result);
     } catch (e: any) {

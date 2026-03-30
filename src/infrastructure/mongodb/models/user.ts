@@ -6,10 +6,11 @@ const UserSchema = new Schema({
   userName: { type: String, required: true, unique: true },
   userPassword: { type: String, required: true },
 
+  // role of the user
   role: {
-      type: String,
-      default: "user",
-    },
+    type: String,
+    default: "user",
+  },
 
   // number of wrong attempts
   wrongLoginAttempts: {
