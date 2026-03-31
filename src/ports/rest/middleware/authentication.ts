@@ -15,6 +15,15 @@ export const generateAccessToken = (user: any) => {
   );
 };
 
+export const generateRefreshToken = (user: any) => {
+  return jwt.sign(
+    {
+      userId: user._id.toString(),
+    },
+    config.jwtSecret,
+  );
+};
+
 // function to authenticate the token
 export const authenticateToken = (req: any, res: any, next: any) => {
   const authHeader: string | undefined = req.headers["authorization"];

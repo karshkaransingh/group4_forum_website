@@ -5,8 +5,10 @@ import userQueries from "../../../infrastructure/mongodb/queries/user";
 import {
   authenticateToken,
   generateAccessToken,
+  generateRefreshToken,
 } from "../middleware/authentication";
 import config from "../../../config/config";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -136,8 +138,15 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
       role: user.role || "user",
     });
 
+    const refreshToken = generateRefreshToken(user);
+
+    user.refreshTokens.push(refreshToken);
+
+    await user.save();
+
     return res.json({
       accessToken,
+      refreshToken,
       role: user.role,
     });
   } catch (error: any) {
@@ -160,5 +169,81 @@ router.post(
     });
   },
 );
+
+router.post("/refreshToken", async (req: any, res: any) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    return res.status(401).json({
+      message: "Refresh token required",
+    });
+  }
+
+  try {
+    const decoded: any = jwt.verify(refreshToken, config.jwtSecret);
+
+    const { mongoDbClient } = dependencies;
+    const mongoDbUser = mongoDbClient.User;
+
+    const user: any = await mongoDbUser.findById(decoded.userId);
+
+    if (!user || !user.refreshTokens.includes(refreshToken)) {
+      return res.status(403).json({
+        message: "Invalid refresh token",
+      });
+    }
+
+    const newAccessToken = generateAccessToken({
+      userName: user.userName,
+      _id: user._id.toString(),
+      isAdmin: false,
+      role: user.role,
+    });
+
+    res.json({
+      accessToken: newAccessToken,
+    });
+  } catch (err) {
+    return res.status(403).json({
+      message: "Invalid refresh token",
+    });
+  }
+});
+
+
+router.delete("/logout", authenticateToken, async (req: any, res: any) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return res.status(400).json({
+        message: "Refresh token required",
+      });
+    }
+
+    const { mongoDbClient } = dependencies;
+    const mongoDbUser = mongoDbClient.User;
+
+    const user: any = await mongoDbUser.findById(req.user.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    user.refreshTokens = user.refreshTokens.filter(
+      (token: string) => token !== refreshToken,
+    );
+
+    await user.save();
+
+    return res.sendStatus(204);
+  } catch (error) {
+    return res.status(400).json({
+      message: "Logout failed",
+    });
+  }
+});
 
 export default router;
