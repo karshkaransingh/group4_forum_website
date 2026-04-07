@@ -170,6 +170,7 @@ router.post(
   },
 );
 
+// route to create new access token using refresh token
 router.post("/refreshToken", async (req: any, res: any) => {
   const { refreshToken } = req.body;
 
@@ -210,7 +211,7 @@ router.post("/refreshToken", async (req: any, res: any) => {
   }
 });
 
-
+// route to logout using refresh token and access token
 router.delete("/logout", authenticateToken, async (req: any, res: any) => {
   try {
     const { refreshToken } = req.body;

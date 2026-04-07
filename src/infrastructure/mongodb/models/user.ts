@@ -24,13 +24,11 @@ const UserSchema = new Schema({
     default: false,
   },
 
-  refreshToken: {
+  // refreshToken tied to the user
+  refreshTokens: {
     type: [String],
-    default: []
-  }
-
+    default: [],
+  },
 });
-
-
 
 export const User = mongoose.model("User", UserSchema);

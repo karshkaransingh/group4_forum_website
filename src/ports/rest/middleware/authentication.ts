@@ -11,10 +11,11 @@ export const generateAccessToken = (user: any) => {
       role: user.role || "user",
     },
     config.jwtSecret,
-    { expiresIn: "1h" },
+    { expiresIn: "10m" },
   );
 };
 
+// function to generate refresh token
 export const generateRefreshToken = (user: any) => {
   return jwt.sign(
     {
