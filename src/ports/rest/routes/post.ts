@@ -22,6 +22,8 @@ router.post("/", authenticateToken, async (req: any, res) => {
       author: req.user.userName,
       authorId: String(req.user.userId),
     });
+
+    console.log(`Post created by ${req.user.userName}, postId: ${result._id}`);
     res.status(200).json(result);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
@@ -32,6 +34,8 @@ router.post("/", authenticateToken, async (req: any, res) => {
 router.get("/", async (_req: any, res) => {
   // calling controller to get all posts
   const result = await getPosts(dependencies)();
+
+  console.log(`Fetched ${result.length} posts`);
   res.json(result);
 });
 
@@ -41,8 +45,11 @@ router.get("/:id", async (req: any, res) => {
   const result = await getPostById(dependencies)(req.params.id);
 
   if (!result) {
+    console.log(`Post not found, id: ${req.params.id}`);
     return res.status(404).json({ error: "Post not found" });
   }
+
+  console.log(`Fetched post, id: ${req.params.id}`);
   res.json(result);
 });
 
@@ -61,6 +68,10 @@ router.put("/:id", authenticateToken, async (req: any, res) => {
       return res.status(404).json({ error: "Post not found" });
     }
 
+    console.log(
+      `Post edited by ${req.user.userName}, postId: ${req.params.id},`
+    );
+
     res.status(200).json(result);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
@@ -72,6 +83,10 @@ router.delete("/:id", authenticateToken, async (req: any, res) => {
   try {
     // calling controller to delete the post
     await deletePost(dependencies)(req.params.id, req.user);
+
+    console.log(
+      `Post deleted by ${req.user.userName}, postId: ${req.params.id},`
+    );
     res.status(200).json({ message: "Deleted" });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
@@ -83,6 +98,8 @@ router.post("/:id/like", authenticateToken, async (req: any, res) => {
   try {
     // calling controller to like the post
     const result = await likePost(dependencies)(req.params.id, req.user);
+
+    console.log(`Post liked by ${req.user.userName}, postId: ${req.params.id}`);
     res.status(200).json(result);
   } catch (error: any) {
     res.status(400).json({ error: error.message });
@@ -97,6 +114,10 @@ router.post("/:id/comment", authenticateToken, async (req: any, res) => {
       ...req.body,
       author: req.user.userName,
     });
+
+    console.log(
+      `Comment added by ${req.user.userName}, postId: ${req.params.id},`
+    );
     res.status(200).json(result);
   } catch (error: any) {
     res.status(400).json({ error: error.message });

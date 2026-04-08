@@ -19,6 +19,7 @@ router.post("/create", async (req: Request, res: Response) => {
 
     // if username or password are not provided
     if (!userName || !userPassword) {
+      console.log("User creation failed: missing username or password");
       return res.status(400).json({
         message: "userName and userPassword are required",
       });
@@ -35,6 +36,9 @@ router.post("/create", async (req: Request, res: Response) => {
 
     // if username exists
     if (existingUser) {
+      console.log(
+        `User creation failed: username already exists (${userName})`,
+      );
       return res.status(400).json({
         message: "Username already exists",
       });
@@ -68,6 +72,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
 
     // if username or password are not provided
     if (!userName || !userPassword) {
+      console.log("Login failed: missing credentials");
       return res.status(400).json({
         message: "userName and userPassword are required",
       });
@@ -77,7 +82,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
     if (
       userName === config.adminUserName &&
       userPassword === config.adminPassword
-    ) {
+    ) {console.log(`Admin logged in: ${userName}`)
       // generating access token for admin
       const accessToken = generateAccessToken({
         userName: config.adminUserName,
@@ -103,6 +108,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
 
     // if user not found don't login
     if (!user) {
+      console.log(`Login failed: user not found (${userName})`);
       return res.status(404).json({
         message: "User not found",
       });
@@ -110,6 +116,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
 
     // if user is blocked don't login
     if (user.isBlocked) {
+      console.log(`Login blocked: ${userName}`);
       return res.status(403).json({
         message: "User is blocked after 3 wrong password attempts",
       });
@@ -120,6 +127,7 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
 
     // if password is wrong, increase the count of wrong attempts
     if (!compareResult) {
+      console.log(`Wrong password attempt: ${userName}`);
       await userQueries.increaseWrongAttempts(mongoDbUser, user);
 
       return res.status(400).json({
@@ -143,6 +151,8 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
     user.refreshTokens.push(refreshToken);
 
     await user.save();
+
+    console.log(`User logged in: ${userName}`);
 
     return res.json({
       accessToken,
@@ -175,6 +185,7 @@ router.post("/refreshToken", async (req: any, res: any) => {
   const { refreshToken } = req.body;
 
   if (!refreshToken) {
+    console.log("Refresh token missing");
     return res.status(401).json({
       message: "Refresh token required",
     });
@@ -189,6 +200,7 @@ router.post("/refreshToken", async (req: any, res: any) => {
     const user: any = await mongoDbUser.findById(decoded.userId);
 
     if (!user || !user.refreshTokens.includes(refreshToken)) {
+      console.log("Invalid refresh token");
       return res.status(403).json({
         message: "Invalid refresh token",
       });
@@ -200,6 +212,7 @@ router.post("/refreshToken", async (req: any, res: any) => {
       isAdmin: false,
       role: user.role,
     });
+    console.log(`Access token refreshed for ${user.userName}`);
 
     res.json({
       accessToken: newAccessToken,
@@ -217,6 +230,7 @@ router.delete("/logout", authenticateToken, async (req: any, res: any) => {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
+      console.log("Logout failed: refresh token missing");
       return res.status(400).json({
         message: "Refresh token required",
       });
@@ -228,6 +242,7 @@ router.delete("/logout", authenticateToken, async (req: any, res: any) => {
     const user: any = await mongoDbUser.findById(req.user.userId);
 
     if (!user) {
+      console.log("Logout failed: user not found");
       return res.status(404).json({
         message: "User not found",
       });
@@ -238,6 +253,7 @@ router.delete("/logout", authenticateToken, async (req: any, res: any) => {
     );
 
     await user.save();
+    console.log(`User logged out: ${user.userName}`);
 
     return res.sendStatus(204);
   } catch (error) {
