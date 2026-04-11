@@ -1,0 +1,24 @@
+info:
+  name: post comment
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts/69d996c3b02a5ba3532153ad/comment"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2NzcxMSwiZXhwIjoxNzc1ODY4MzExfQ.Q44e-I6CLTw16rM1xB8GUe4RewC9KSwI1Z2XnSfqk0Q
+  body:
+    type: json
+    data: |-
+      {
+            "content": "Nice post 2"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

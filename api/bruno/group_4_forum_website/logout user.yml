@@ -1,0 +1,24 @@
+info:
+  name: logout user
+  type: http
+  seq: 13
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/user/logout"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuNCIsInVzZXJJZCI6IjY5ZDk5NmE0YjAyYTViYTM1MzIxNTNhOCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2Nzc4NywiZXhwIjoxNzc1ODY4Mzg3fQ.kZocCqSHmmbZcATK4QsmR2G448OmaO03hZ8dw8SaujI
+  body:
+    type: json
+    data: |-
+      {
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWQ5OTZhNGIwMmE1YmEzNTMyMTUzYTgiLCJpYXQiOjE3NzU4Njc3ODd9.nbjFHXlbNanvSDDWEwuEfjv7vgl00ILwoMp_8ddZ6Ak"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

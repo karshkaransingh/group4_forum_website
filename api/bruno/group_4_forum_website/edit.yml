@@ -1,0 +1,25 @@
+info:
+  name: edit
+  type: http
+  seq: 9
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/posts/69d99718b02a5ba3532153b9"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMTEiLCJ1c2VySWQiOiI2OWQ5OTZkN2IwMmE1YmEzNTMyMTUzYjIiLCJpc0FkbWluIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzU4Njc2MTQsImV4cCI6MTc3NTg2ODIxNH0.r1RyPpgXQ7qrGRV5MSfi_iLuKnvWpDejxwIFychWy_4
+  body:
+    type: json
+    data: |-
+      {
+        "title": "edited by user2",
+        "content": "here"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

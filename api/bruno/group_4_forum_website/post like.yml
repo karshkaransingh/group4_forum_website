@@ -1,0 +1,18 @@
+info:
+  name: post like
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts/69d996cbb02a5ba3532153af/like"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2NzcxMSwiZXhwIjoxNzc1ODY4MzExfQ.Q44e-I6CLTw16rM1xB8GUe4RewC9KSwI1Z2XnSfqk0Q
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

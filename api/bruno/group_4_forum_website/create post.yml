@@ -1,0 +1,26 @@
+info:
+  name: create post
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts"
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuNCIsInVzZXJJZCI6IjY5ZDk5NmE0YjAyYTViYTM1MzIxNTNhOCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2NzkyNywiZXhwIjoxNzc1ODY4NTI3fQ.gyjDOUgbZQRVwYLpg_E7BafjWzcwIrPVBmoyHAjYBN0
+  body:
+    type: json
+    data: |-
+      {
+        "title": "user post 3",
+        "content": "hii forum"
+       
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
