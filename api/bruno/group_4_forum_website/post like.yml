@@ -5,10 +5,10 @@ info:
 
 http:
   method: POST
-  url: "{{baseUrl}}/posts/69d996cbb02a5ba3532153af/like"
+  url: "{{baseUrl}}/posts/69dad7b956e5a5428e0e20e8/like"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2NzcxMSwiZXhwIjoxNzc1ODY4MzExfQ.Q44e-I6CLTw16rM1xB8GUe4RewC9KSwI1Z2XnSfqk0Q
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMTIiLCJ1c2VySWQiOiI2OWRhZDdhYTU2ZTVhNTQyOGUwZTIwZTMiLCJpc0FkbWluIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzU5NDk3NDMsImV4cCI6MTc3NTk1MDM0M30.gq1Ir9_qOj_e8OFoOEMB9o0GPz3tvcc2VzbfAmhahQQ
   auth: inherit
 
 settings:

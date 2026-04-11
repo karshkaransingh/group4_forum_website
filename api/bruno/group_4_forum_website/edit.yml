@@ -5,15 +5,15 @@ info:
 
 http:
   method: PUT
-  url: "{{baseUrl}}/posts/69d99718b02a5ba3532153b9"
+  url: "{{baseUrl}}/posts/69dad7b956e5a5428e0e20e8"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMTEiLCJ1c2VySWQiOiI2OWQ5OTZkN2IwMmE1YmEzNTMyMTUzYjIiLCJpc0FkbWluIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzU4Njc2MTQsImV4cCI6MTc3NTg2ODIxNH0.r1RyPpgXQ7qrGRV5MSfi_iLuKnvWpDejxwIFychWy_4
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuIiwidXNlcklkIjoiNjlkMTkyOTlhYjA5MWMzM2RlOTBkYzNjIiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJzdXBlcnVzZXIiLCJpYXQiOjE3NzU5NDk4NDEsImV4cCI6MTc3NTk1MDQ0MX0.on4m-RPGlQ6xK2TnAGxN-HpKCzq45sz3WXZOPPYUhd0
   body:
     type: json
     data: |-
       {
-        "title": "edited by user2",
+        "title": "edited by super",
         "content": "here"
       }
   auth: inherit
