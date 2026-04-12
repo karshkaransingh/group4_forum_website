@@ -1,8 +1,13 @@
+// importing validation functions from domain layer
 import { validateCreatePost, validateEditPost, validateComment } from "../post";
 
+// test suite for post validation logic
 describe("post domain validation", () => {
+  // testing validation for creating post
   describe("validateCreatePost", () => {
+    // TEST valid input
     it("should return valid post data with default likes and comments", () => {
+      // sample data
       const data = {
         title: "My first post",
         content: "This is the content",
@@ -10,6 +15,7 @@ describe("post domain validation", () => {
         authorId: "123",
       };
 
+      // calling function
       const result = validateCreatePost(data);
 
       expect(result).toEqual({
@@ -22,6 +28,7 @@ describe("post domain validation", () => {
       });
     });
 
+    // TEST error when title missing
     it("should throw error when title is missing", () => {
       const data = {
         content: "This is the content",
@@ -34,6 +41,7 @@ describe("post domain validation", () => {
       );
     });
 
+    // TEST error when content missing
     it("should throw error when content is missing", () => {
       const data = {
         title: "My first post",
@@ -46,6 +54,7 @@ describe("post domain validation", () => {
       );
     });
 
+    // TEST error when author missing
     it("should throw error when author is missing", () => {
       const data = {
         title: "My first post",
@@ -59,7 +68,9 @@ describe("post domain validation", () => {
     });
   });
 
+  // testing validation for editing post
   describe("validateEditPost", () => {
+    // TEST valid edit input
     it("should return valid edited post data", () => {
       const data = {
         title: "Updated title",
@@ -74,6 +85,7 @@ describe("post domain validation", () => {
       });
     });
 
+    // TEST error when title missing
     it("should throw error when title is missing", () => {
       const data = {
         content: "Updated content",
@@ -84,6 +96,7 @@ describe("post domain validation", () => {
       );
     });
 
+    // TEST error when content missing
     it("should throw error when content is missing", () => {
       const data = {
         title: "Updated title",
@@ -95,7 +108,9 @@ describe("post domain validation", () => {
     });
   });
 
+  // TEST validation for comment
   describe("validateComment", () => {
+    // TEST valid comment input
     it("should return valid comment data", () => {
       const data = {
         content: "Nice post",
@@ -110,6 +125,7 @@ describe("post domain validation", () => {
       });
     });
 
+    // TEST error when content missing
     it("should throw error when content is missing", () => {
       const data = {
         author: "krn",
@@ -120,6 +136,7 @@ describe("post domain validation", () => {
       );
     });
 
+    // TEST error when author missing
     it("should throw error when author is missing", () => {
       const data = {
         content: "Nice post",

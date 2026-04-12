@@ -82,7 +82,8 @@ router.post("/loginJwt", async (req: Request, res: Response) => {
     if (
       userName === config.adminUserName &&
       userPassword === config.adminPassword
-    ) {console.log(`Admin logged in: ${userName}`)
+    ) {
+      console.log(`Admin logged in: ${userName}`);
       // generating access token for admin
       const accessToken = generateAccessToken({
         userName: config.adminUserName,
@@ -206,6 +207,7 @@ router.post("/refreshToken", async (req: any, res: any) => {
       });
     }
 
+    // generating new access token
     const newAccessToken = generateAccessToken({
       userName: user.userName,
       _id: user._id.toString(),
@@ -248,6 +250,7 @@ router.delete("/logout", authenticateToken, async (req: any, res: any) => {
       });
     }
 
+    // removing refresh token from the list
     user.refreshTokens = user.refreshTokens.filter(
       (token: string) => token !== refreshToken,
     );

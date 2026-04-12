@@ -36,6 +36,7 @@ export const authenticateToken = (req: any, res: any, next: any) => {
     });
   }
 
+  // verifying the token
   jwt.verify(token, config.jwtSecret, (err, user) => {
     if (err) {
       return res.status(403).json({
