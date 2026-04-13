@@ -1,18 +1,21 @@
 info:
-  name: register
+  name: register superuser
   type: http
-  seq: 5
+  seq: 15
 
 http:
   method: POST
   url: "{{baseUrl}}/user/create"
   body:
     type: json
-    data: |-
+    data: |+
       {
-        "userName": "karan12",
-        "userPassword": "123456"
+        "userName": "karan20",
+        "userPassword": "123456",
+        "role": "superuser"
       }
+
+
   auth: inherit
 
 settings:

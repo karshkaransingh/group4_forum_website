@@ -5,10 +5,10 @@ info:
 
 http:
   method: DELETE
-  url: "{{baseUrl}}/posts/69d99718b02a5ba3532153b9"
+  url: "{{baseUrl}}/posts/69d996c3b02a5ba3532153ad"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMTEiLCJ1c2VySWQiOiI2OWQ5OTZkN2IwMmE1YmEzNTMyMTUzYjIiLCJpc0FkbWluIjpmYWxzZSwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzU4Njc2MTQsImV4cCI6MTc3NTg2ODIxNH0.r1RyPpgXQ7qrGRV5MSfi_iLuKnvWpDejxwIFychWy_4
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuIiwidXNlcklkIjoiNjlkMTkyOTlhYjA5MWMzM2RlOTBkYzNjIiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJzdXBlcnVzZXIiLCJpYXQiOjE3NzYwNDY1MzIsImV4cCI6MTc3NjA0NzEzMn0.qSN7q85rnNRxiRXFUQKs6r5Md-mv9O87JX-eaRAZePA
   auth: inherit
 
 settings:
