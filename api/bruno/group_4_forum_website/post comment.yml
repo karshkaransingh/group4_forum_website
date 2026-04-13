@@ -5,10 +5,10 @@ info:
 
 http:
   method: POST
-  url: "{{baseUrl}}/posts/69d996c3b02a5ba3532153ad/comment"
+  url: "{{baseUrl}}/posts/69dc6b799783e75d8c6439e1/comment"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2NzcxMSwiZXhwIjoxNzc1ODY4MzExfQ.Q44e-I6CLTw16rM1xB8GUe4RewC9KSwI1Z2XnSfqk0Q
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuIiwidXNlcklkIjoiNjlkYzZiMGI5NzgzZTc1ZDhjNjQzOWNhIiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2MDUzMjAxLCJleHAiOjE3NzYwNTM4MDF9.4dFMAAUV6k8F3Ls_p_Efc6lttgMxlbHij8zvRgXQnT4
   body:
     type: json
     data: |-
