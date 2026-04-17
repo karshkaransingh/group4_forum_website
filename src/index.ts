@@ -34,4 +34,5 @@ const server = app.listen(desiredPort, () => {
   const actualPort = typeof addr === "object" && addr ? addr.port : desiredPort;
 
   console.log(`Server listening on http://localhost:${actualPort}`);
+  console.log(`get posts on http://localhost:${actualPort}/api/posts/`);
 });

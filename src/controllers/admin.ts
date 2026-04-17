@@ -2,12 +2,16 @@
 export const getSiteStats = (dependencies: any) => async () => {
   const { mongoDbClient } = dependencies;
 
-  // total users and posts
+  // total users and undeleted posts
   const totalUsers = await mongoDbClient.User.countDocuments();
-  const totalPosts = await mongoDbClient.Post.countDocuments();
+  const totalPosts = await mongoDbClient.Post.countDocuments({
+    isDeleted: false,
+  });
 
-  // getting all posts
-  const posts: any[] = await mongoDbClient.Post.find();
+  // getting all undeleted posts
+  const posts: any[] = await mongoDbClient.Post.find({
+    isDeleted: false,
+  });
 
   let totalLikes = 0;
   let totalComments = 0;

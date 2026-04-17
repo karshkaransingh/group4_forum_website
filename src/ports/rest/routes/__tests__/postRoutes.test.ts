@@ -99,8 +99,8 @@ describe("post routes", () => {
   });
 
   // TEST edit post route
-  it("PUT /api/posts/:id edits post", async () => {
-    const res = await request(app).put("/api/posts/1").send({
+  it("PUT /api/posts/edit/:id edits post", async () => {
+    const res = await request(app).put("/api/posts/edit/1").send({
       title: "updated",
       content: "updated",
     });
@@ -109,10 +109,11 @@ describe("post routes", () => {
   });
 
   // TEST delete post route
-  it("DELETE /api/posts/:id deletes post", async () => {
-    const res = await request(app).delete("/api/posts/1");
+  it("DELETE /api/posts/delete/:id deletes post", async () => {
+    const res = await request(app).put("/api/posts/delete/1");
 
     expect(res.status).toBe(200);
+    expect(res.body.message).toBe("Deleted");
   });
 
   // TEST like post route

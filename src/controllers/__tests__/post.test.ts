@@ -41,7 +41,7 @@ describe("post controller", () => {
     mockedPostQueries.createPost.mockResolvedValue({
       title: "test",
       content: "content",
-      author: "krn",
+      author: "karsh",
       authorId: "1",
       likes: 0,
       comments: [],
@@ -50,7 +50,7 @@ describe("post controller", () => {
     const data = {
       title: "test",
       content: "content",
-      author: "krn",
+      author: "karsh",
       authorId: "1",
     };
 
@@ -61,7 +61,7 @@ describe("post controller", () => {
     expect(result).toEqual({
       title: "test",
       content: "content",
-      author: "krn",
+      author: "karsh",
       authorId: "1",
       likes: 0,
       comments: [],
@@ -134,13 +134,17 @@ describe("post controller", () => {
   });
 
   // TEST delete post when user is admin
-  it("should delete post if user is admin", async () => {
+  it("should soft delete post if user is admin", async () => {
     mockedPostQueries.getPostById.mockResolvedValue({
       _id: "1",
       authorId: "123",
+      isDeleted: false,
     } as any);
 
-    mockedPostQueries.deletePost.mockResolvedValue({ _id: "1" } as any);
+    mockedPostQueries.deletePost.mockResolvedValue({
+      _id: "1",
+      isDeleted: true,
+    } as any);
 
     const result = await deletePost(dependencies)("1", {
       userId: "555",
@@ -148,7 +152,10 @@ describe("post controller", () => {
       role: "user",
     });
 
-    expect(result).toEqual({ _id: "1" });
+    expect(result).toEqual({
+      _id: "1",
+      isDeleted: true,
+    });
   });
 
   // TEST delete post when user is not owner/admin
@@ -156,6 +163,7 @@ describe("post controller", () => {
     mockedPostQueries.getPostById.mockResolvedValue({
       _id: "1",
       authorId: "999",
+      isDeleted: false,
     } as any);
 
     await expect(
@@ -212,13 +220,13 @@ describe("post controller", () => {
 
     await addComment(dependencies)("1", {
       content: "Nice post",
-      author: "krn",
+      author: "navdeep",
     });
 
     expect(fakePost.comments).toEqual([
       {
         content: "Nice post",
-        author: "krn",
+        author: "navdeep",
       },
     ]);
   });

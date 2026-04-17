@@ -250,6 +250,7 @@ describe("user routes", () => {
       .delete("/api/user/logout")
       .send({ refreshToken: "validToken" });
 
-    expect(res.status).toBe(204);
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe("Logout successful");
   });
 });

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import config from "../../../config/config";
 
-// function to generate access token
+// middleware function to generate access token
 export const generateAccessToken = (user: any) => {
   return jwt.sign(
     {
@@ -15,7 +15,7 @@ export const generateAccessToken = (user: any) => {
   );
 };
 
-// function to generate refresh token
+// middleware function to generate refresh token
 export const generateRefreshToken = (user: any) => {
   return jwt.sign(
     {
@@ -25,11 +25,13 @@ export const generateRefreshToken = (user: any) => {
   );
 };
 
-// function to authenticate the token
+// middleware function to authenticate the token
 export const authenticateToken = (req: any, res: any, next: any) => {
+  // getting the token from header
   const authHeader: string | undefined = req.headers["authorization"];
   const token = authHeader?.split(" ")[1];
 
+  // if no token found
   if (!token) {
     return res.status(401).json({
       message: "No token provided",
@@ -49,7 +51,7 @@ export const authenticateToken = (req: any, res: any, next: any) => {
   });
 };
 
-// function to give access to admins only
+// middleware function to give access to admins only
 export const authorizeAdmin = (req: any, res: any, next: any) => {
   if (!req.user || req.user.isAdmin !== true) {
     return res.status(403).json({

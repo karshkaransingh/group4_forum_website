@@ -41,20 +41,22 @@ router.get("/", async (_req: any, res) => {
 
 // route to get post by id (accessed by everyone)
 router.get("/:id", async (req: any, res) => {
-  // calling controller to create the post by id
+  // calling controller to get the post by id
   const result = await getPostById(dependencies)(req.params.id);
 
+  // if no post found
   if (!result) {
     console.log(`Post not found, id: ${req.params.id}`);
     return res.status(404).json({ error: "Post not found" });
   }
 
+  // if post found
   console.log(`Fetched post, id: ${req.params.id}`);
   res.json(result);
 });
 
 // route to edit posts (accessed by authenticated users)
-router.put("/:id", authenticateToken, async (req: any, res) => {
+router.put("/edit/:id", authenticateToken, async (req: any, res) => {
   try {
     // calling controller to edit the post
     const result = await editPost(dependencies)(
@@ -63,13 +65,13 @@ router.put("/:id", authenticateToken, async (req: any, res) => {
       req.user,
     );
 
-    // if no result found
+    // if no post found
     if (!result) {
       return res.status(404).json({ error: "Post not found" });
     }
 
     console.log(
-      `Post edited by ${req.user.userName}, postId: ${req.params.id},`
+      `Post edited by ${req.user.userName}, postId: ${req.params.id},`,
     );
 
     res.status(200).json(result);
@@ -79,13 +81,13 @@ router.put("/:id", authenticateToken, async (req: any, res) => {
 });
 
 // route to delete posts (accessed by authenticated users)
-router.delete("/:id", authenticateToken, async (req: any, res) => {
+router.put("/delete/:id", authenticateToken, async (req: any, res) => {
   try {
     // calling controller to delete the post
     await deletePost(dependencies)(req.params.id, req.user);
 
     console.log(
-      `Post deleted by ${req.user.userName}, postId: ${req.params.id},`
+      `Post deleted by ${req.user.userName}, postId: ${req.params.id},`,
     );
     res.status(200).json({ message: "Deleted" });
   } catch (error: any) {
@@ -116,7 +118,7 @@ router.post("/:id/comment", authenticateToken, async (req: any, res) => {
     });
 
     console.log(
-      `Comment added by ${req.user.userName}, postId: ${req.params.id},`
+      `Comment added by ${req.user.userName}, postId: ${req.params.id},`,
     );
     res.status(200).json(result);
   } catch (error: any) {

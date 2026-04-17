@@ -15,6 +15,7 @@ const PostSchema = new mongoose.Schema({
   likes: { type: Number, default: 0 },
   likedBy: { type: [String], default: [] },
   comments: { type: [CommentSchema], default: [] },
+  isDeleted: { type: Boolean, default: false },
 });
 
 export const Post = mongoose.model("Post", PostSchema);
