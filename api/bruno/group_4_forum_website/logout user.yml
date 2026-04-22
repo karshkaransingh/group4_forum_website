@@ -8,12 +8,12 @@ http:
   url: "{{baseUrl}}/user/logout"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuNCIsInVzZXJJZCI6IjY5ZDk5NmE0YjAyYTViYTM1MzIxNTNhOCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NTg2Nzc4NywiZXhwIjoxNzc1ODY4Mzg3fQ.kZocCqSHmmbZcATK4QsmR2G448OmaO03hZ8dw8SaujI
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Inh5eiIsInVzZXJJZCI6IjY5ZThiYWI5MzZjNmM3MzQ5OWY3MjJjNSIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3Njg2MDI0MywiZXhwIjoxNzc2ODYwODQzfQ.sL62zQPw2mdOKFs1ydh1YJLTa04k5TWwyjWuJsseS1c
   body:
     type: json
     data: |-
       {
-        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWQ5OTZhNGIwMmE1YmEzNTMyMTUzYTgiLCJpYXQiOjE3NzU4Njc3ODd9.nbjFHXlbNanvSDDWEwuEfjv7vgl00ILwoMp_8ddZ6Ak"
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU4YmFiOTM2YzZjNzM0OTlmNzIyYzUiLCJpYXQiOjE3NzY4NjAyNDN9.p4t-1dcn3x3sv_7dfQagibkK6CTxmoYgz4ThdvmlS9I"
       }
   auth: inherit
 

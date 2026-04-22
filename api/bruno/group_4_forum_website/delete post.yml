@@ -4,11 +4,11 @@ info:
   seq: 3
 
 http:
-  method: DELETE
-  url: "{{baseUrl}}/posts/69dc6b4a9783e75d8c6439d8"
+  method: PUT
+  url: "{{baseUrl}}/posts/delete/69e8bc7736c6c73499f722eb"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMSIsInVzZXJJZCI6IjY5ZGM2YjEyOTc4M2U3NWQ4YzY0MzljZCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NjA1MzA5MCwiZXhwIjoxNzc2MDUzNjkwfQ.NavAF7GGoNedG-BeDVfrkBRDw3M15ThIR0JtvJRWwKs
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InN1cGVyMiIsInVzZXJJZCI6IjY5ZThiZDI4MzZjNmM3MzQ5OWY3MjMwMyIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzc2ODYwNTA5LCJleHAiOjE3NzY4NjExMDl9.2BNcg-OpSODTamvN7Xxsr7VK358VH2JA1hDWiXjrI2w
   auth: inherit
 
 settings:

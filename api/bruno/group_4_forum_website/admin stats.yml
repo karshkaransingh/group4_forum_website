@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/admin/stats"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NjA1MzEyMSwiZXhwIjoxNzc2MDUzNzIxfQ.eBRifsLGLfCWazHbLsoBMr1S2658orUo6VaMbpwDNQM
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwidXNlcklkIjoiYWRtaW4iLCJpc0FkbWluIjp0cnVlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3Njg2MDMzMiwiZXhwIjoxNzc2ODYwOTMyfQ.ky1cFX-Al56LGTvI9vMMm37gvOgx6eamAx3aw9xemUQ
   auth: inherit
 
 settings:

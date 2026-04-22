@@ -10,7 +10,7 @@ http:
     type: json
     data: |+
       {
-        "userName": "super1",
+        "userName": "super2",
         "userPassword": "123456",
         "role": "superuser"
       }

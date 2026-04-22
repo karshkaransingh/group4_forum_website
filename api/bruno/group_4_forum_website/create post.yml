@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/posts"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuMSIsInVzZXJJZCI6IjY5ZGM2YjEyOTc4M2U3NWQ4YzY0MzljZCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoidXNlciIsImlhdCI6MTc3NjA1MzA5MCwiZXhwIjoxNzc2MDUzNjkwfQ.NavAF7GGoNedG-BeDVfrkBRDw3M15ThIR0JtvJRWwKs
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcnNoIiwidXNlcklkIjoiNjllMmI0YWZjYWI5MjQ5NjdjODIxYWZiIiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2ODYwNDM0LCJleHAiOjE3NzY4NjEwMzR9.Dpu91Uz3_HhN4B50VVYS0w9fI0pvBYE_6DvCr5j5v78
   body:
     type: json
     data: |-

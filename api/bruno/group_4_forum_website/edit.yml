@@ -5,10 +5,10 @@ info:
 
 http:
   method: PUT
-  url: "{{baseUrl}}/posts/69dad7b956e5a5428e0e20e8"
+  url: "{{baseUrl}}/posts/edit/69e8bafe36c6c73499f722cb"
   headers:
     - name: Authorization
-      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImthcmFuIiwidXNlcklkIjoiNjlkMTkyOTlhYjA5MWMzM2RlOTBkYzNjIiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJzdXBlcnVzZXIiLCJpYXQiOjE3NzU5NDk4NDEsImV4cCI6MTc3NTk1MDQ0MX0.on4m-RPGlQ6xK2TnAGxN-HpKCzq45sz3WXZOPPYUhd0
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InN1cGVyMSIsInVzZXJJZCI6IjY5ZTJjN2ZiOWNlN2Q4M2UzN2FhMGEwNCIsImlzQWRtaW4iOmZhbHNlLCJyb2xlIjoic3VwZXJ1c2VyIiwiaWF0IjoxNzc2ODU5OTc0LCJleHAiOjE3NzY4NjA1NzR9.4_LLjjyT0WVGfChwsjMTsuivqc1q2DN6Qx0yusFoDKw
   body:
     type: json
     data: |-
